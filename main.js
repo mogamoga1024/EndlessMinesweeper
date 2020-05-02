@@ -31,6 +31,9 @@ if(navigator.userAgent.match(/MSIE 10/i) ||
 }
 
 // ロード時処理 start
+
+//localStorage.clear()
+
 if (localStorage !== undefined && localStorage.getItem("recode") != null) {
 	Recode.data = JSON.parse(localStorage.getItem("recode"));
 }
@@ -39,6 +42,7 @@ let timer = Timer.getInstance();
 let currentLevel = EASY;
 
 init(currentLevel);
+
 // ロード時処理 end
 
 $("#face").click(function() {

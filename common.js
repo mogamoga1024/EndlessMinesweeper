@@ -39,6 +39,8 @@ let rgba = function(colorData, opacity) {
 
 // n秒を"(h)h(m)m(s)s"に変換します。
 let secToHms = function(sec) {
+	if (sec === null) return "-"
+	
 	let hms = "";
 	let h = Math.floor(sec / 3600);
 	let m = Math.floor(sec % 3600 / 60);
@@ -67,30 +69,32 @@ let MinesweeperFactory = {
 	}
 };
 
+// 過去のクリアタイムなどをまとめたオブジェクト
 let Recode = {
 	data: [
 		/* EASY    */ {
 			ranking: [null, null, null],
-			win: 0,
-			lose: 0
+			play: 0,
+			win: 0
 		},
 		/* NORMAL  */ {
 			ranking: [null, null, null],
-			win: 0,
-			lose: 0
+			play: 0,
+			win: 0
 		},
 		/* HARD    */ {
 			ranking: [null, null, null],
-			win: 0,
-			lose: 0
+			play: 0,
+			win: 0
 		},
 		/* TAXING  */ {
 			ranking: [null, null, null],
-			win: 0,
-			lose: 0
+			play: 0,
+			win: 0
 		},
 		/* ENDLESS */ {
-			ranking: [null, null, null]
+			ranking: [0, 0, 0],
+			play: 0
 		}
 	],
 	setClearTimeRanking: function(level, sec) {
@@ -147,10 +151,10 @@ let Recode = {
 			ranking.pop();
 		}
 	},
+	incPlayCount: function(level) {
+		this.data[level].play++;
+	},
 	incWinCount: function(level) {
 		this.data[level].win++;
-	},
-	incLoseCount: function(level) {
-		this.data[level].lose++;
 	}
 };

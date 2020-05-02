@@ -73,6 +73,12 @@ Minesweeper.prototype.start = function() {
 					self.fillMines(row, col);
 					// タイム計測開始
 					self.timer.start();
+					
+					// プレイ回数を1増やして保存する。
+					Recode.incPlayCount(self.level);
+					if (localStorage !== undefined) {
+						localStorage.setItem("recode", JSON.stringify(Recode.data));
+					}
 				}
 				self.isDownLeft = true;
 				// 穴を掘る。
@@ -160,11 +166,6 @@ Minesweeper.prototype.gameover = function() {
 	$("#field td").off("mousedown mouseup");
 	
 	$face.text(Face.DIZZY);
-	
-	Recode.incLoseCount(this.level);
-	if (localStorage !== undefined) {
-		localStorage.setItem("recode", JSON.stringify(Recode.data));
-	}
 	
 	// 埋まっている地雷を表示します。
 	for (let row = 0; row < this.rowSize; row++) {

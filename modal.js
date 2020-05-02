@@ -5,6 +5,24 @@ $("#history").click(function() {
 		return false;
 	}
 
+	$(".record").each(function(level) {
+		let $this = $(this)
+
+		if (level !== ENDLESS) {
+			$this.children(".first").text(secToHms(Recode.data[level].ranking[0]));
+			$this.children(".second").text(secToHms(Recode.data[level].ranking[1]));
+			$this.children(".third").text(secToHms(Recode.data[level].ranking[2]));
+			$this.children(".play-count").text(Recode.data[level].play);
+			$this.children(".win-count").text(Recode.data[level].win);
+		}
+		else {
+			$this.children(".first").text(Recode.data[level].ranking[0] + "pt");
+			$this.children(".second").text(Recode.data[level].ranking[1] + "pt");
+			$this.children(".third").text(Recode.data[level].ranking[2] + "pt");
+			$this.children(".play-count").text(Recode.data[level].play);
+		}
+	});
+
 	$("#modal-container").fadeIn("slow");
 	$("#modal-content").fadeIn("slow");
 	return false;

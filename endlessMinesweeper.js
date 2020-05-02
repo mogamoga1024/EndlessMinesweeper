@@ -82,6 +82,12 @@ EndlessMinesweeper.prototype.start = function() {
 						self.safeCellsCounts[key]++;
 					}
 					self.timer.start();
+					
+					// プレイ回数を1増やして保存する。
+					Recode.incPlayCount(ENDLESS);
+					if (localStorage !== undefined) {
+						localStorage.setItem("recode", JSON.stringify(Recode.data));
+					}
 				}
 				self.isDownLeft = true;
 				let state = self.dig(row, col);
