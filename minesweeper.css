@@ -120,6 +120,8 @@ li:last-child {
   border: solid 1px black;
 }
 
+/* 過去データ表示用 */
+
 #modal-container {
   position: fixed;
   top: 0;
@@ -134,13 +136,27 @@ li:last-child {
 #modal-content {
   position: fixed;
   width: 700px;
-  height: 500px;
+  /* height: 500px; */
   top: calc(50% - 250px);
   left: calc(50% - 350px);
   background-color: white;
   display: none;
   z-index: 3;
 }
+
+#history-detail {
+	font-size: 20px;
+	border-collapse: collapse;
+}
+
+#history-detail td {
+	width: 150px;
+	height: 30px;
+	border: solid 1px #000000;
+	text-align: center;
+}
+
+/* マインスイーパーのフィールド */
 
 #field {
   margin: 250px auto 100px;
@@ -159,14 +175,3 @@ li:last-child {
   text-align: center;
 }
 
-#history-detail {
-	font-size: 20px;
-	border-collapse: collapse;
-}
-
-#history-detail td {
-	width: 150px;
-	height: 30px;
-	border: solid 1px #000000;
-	text-align: center;
-}
