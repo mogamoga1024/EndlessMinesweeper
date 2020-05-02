@@ -134,10 +134,10 @@ li:last-child {
 }
 
 #modal-content {
-  position: fixed;
+  position: relative;
   width: 700px;
-  /* height: 500px; */
-  top: calc(50% - 250px);
+  height: 187x;
+  top: calc(50% - 93.5px);
   left: calc(50% - 350px);
   background-color: white;
   display: none;
