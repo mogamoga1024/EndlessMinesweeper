@@ -18,7 +18,7 @@ $field.on('contextmenu',function(){
 });
 
 // IEでスクロール時にカクつくのを防ぐ。
-// ttps://souken-blog.com/2017/08/25/ie11-smoothscroll/
+// https://souken-blog.com/2017/08/25/ie11-smoothscroll/
 if(navigator.userAgent.match(/MSIE 10/i) ||
    navigator.userAgent.match(/Trident\/7\./) ||
    navigator.userAgent.match(/Edge\/12\./)) {
@@ -31,7 +31,7 @@ if(navigator.userAgent.match(/MSIE 10/i) ||
 }
 
 // ロード時処理 start
-if (localStorage.getItem("recode") != null) {
+if (localStorage !== undefined && localStorage.getItem("recode") != null) {
 	Recode.data = JSON.parse(localStorage.getItem("recode"));
 }
 

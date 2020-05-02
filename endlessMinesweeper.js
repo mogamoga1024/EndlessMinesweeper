@@ -204,7 +204,9 @@ EndlessMinesweeper.prototype.gameover = function() {
 	$face.text(Face.DIZZY);
 	
 	Recode.setScoreRanking(this.score.getScore());
-	localStorage.setItem("recode", JSON.stringify(Recode.data));
+	if (localStorage !== undefined) {
+		localStorage.setItem("recode", JSON.stringify(Recode.data));
+	} 
 	
 	for (let row = 0; row < this.rowSize; row++) {
 		for (let col = 0; col < this.colSize; col++) {

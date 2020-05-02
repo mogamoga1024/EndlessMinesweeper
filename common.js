@@ -31,15 +31,6 @@ let fieldData = [
 	/* ENDLESS */ {row: 16, col: 30}
 ];
 
-// debug
-/*let fieldData = [
-	{row: 9, col: 9, mpf: 0.1, colorData: [127, 191, 255]},
-	{row: 16, col: 16, mpf: 0.1, colorData: [76, 140, 54]},
-	{row: 16, col: 30, mpf: 0.1, colorData: [165, 150, 76]},
-	{row: 100, col: 30, mpf: 0.1, colorData: [56, 51, 44]},
-	{row: 5, col: 10}
-];*/
-
 // colorData配列:[red, green, blue]に、透明度を加えて、文字列で表現されたrgbaを返す。
 let rgba = function(colorData, opacity) {
 	if (opacity === undefined) opacity = 1;

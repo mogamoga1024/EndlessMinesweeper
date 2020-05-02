@@ -162,7 +162,9 @@ Minesweeper.prototype.gameover = function() {
 	$face.text(Face.DIZZY);
 	
 	Recode.incLoseCount(this.level);
-	localStorage.setItem("recode", JSON.stringify(Recode.data));
+	if (localStorage !== undefined) {
+		localStorage.setItem("recode", JSON.stringify(Recode.data));
+	}
 	
 	// 埋まっている地雷を表示します。
 	for (let row = 0; row < this.rowSize; row++) {
@@ -188,7 +190,9 @@ Minesweeper.prototype.gameclear = function() {
 	Recode.incWinCount(this.level);
 	
 	Recode.setClearTimeRanking(this.level, this.timer.getSec());
-	localStorage.setItem("recode", JSON.stringify(Recode.data));
+	if (localStorage !== undefined) {
+		localStorage.setItem("recode", JSON.stringify(Recode.data));
+	}
 };
 
 // fieldに地雷を埋めます。
