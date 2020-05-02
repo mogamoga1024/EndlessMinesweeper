@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>まいん</title>
+  <link rel="stylesheet" type="text/css" href="minesweeper.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+  <div id="modal-container">
+    <div id="modal-content">
+    	<table id="history-detail">
+			<tr>
+				<td></td>
+				<td>1st</td>
+				<td>2nd</td>
+				<td>3rd</td>
+				<td>Played Times</td>
+				<td>Winning Times</td>
+			</tr>
+			<tr>
+				<td>Easy</td>
+				<td>99h59m59s</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Normal</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Hard</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Taxing</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Endless</td>
+				<td>99999pt</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>-</td>
+			</tr>
+		</table>
+    </div>
+  </div>
+  <div id="menu">
+    <div id="minesCount"></div>
+    <div id="score"></div>
+    <div id="timer"></div>
+    <div id="history">History</div>
+    <ul>
+      <li id="easy" class="selected">Easy</li>
+      <li id="normal">Normal</li>
+      <li id="hard">Hard</li>
+      <li id="taxing">Taxing</li>
+      <li id="endless">Endless</li>
+    </ul>
+    <button id="face"></button>
+  </div>
+  <table id="field">
+  </table>
+  <script src="common.js"></script>
+  <script src="modal.js"></script>
+  <script src="pulldown.js"></script>
+  <script src="score.js"></script>
+  <script src="minesweeper.js"></script>
+  <script src="endlessMinesweeper.js"></script>
+  <script src="timer.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
