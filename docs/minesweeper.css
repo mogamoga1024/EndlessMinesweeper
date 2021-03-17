@@ -159,7 +159,7 @@ li:last-child {
 /* マインスイーパーのフィールド */
 
 #field {
-  margin: 175px auto 0;
+  margin: 175px auto 50px;
   border: solid 5px #777;
   border-collapse: collapse;
   background-color: white;
