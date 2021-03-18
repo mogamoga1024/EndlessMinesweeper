@@ -127,6 +127,13 @@ li:last-child {
   border: solid 1px black;
 }
 
+#contact {
+  position: fixed;
+  right: 5px;
+  top: 90vh;
+  font-size: 12px;
+}
+
 /* 過去データ表示用 */
 
 #modal-container {
