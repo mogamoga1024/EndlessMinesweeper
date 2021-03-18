@@ -16,10 +16,6 @@ let EndlessMinesweeper = function() {
 	this.DIED = 1;
 	this.isFirstLeftDown = true;
 	this.timer = Timer.getInstance();
-	
-	// debug start
-	console.log(Recode.data);
-	// debug end
 };
 
 EndlessMinesweeper.prototype.start = function() {

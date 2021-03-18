@@ -19,10 +19,6 @@ let Minesweeper = function(level) {
 	this.CLEAR = 2;
 	this.isFirstLeftDown = true;
 	this.timer = Timer.getInstance();
-	
-	// debug start
-	console.log(Recode.data);
-	// debug end
 };
 
 // ゲームを開始できる状況を作り出します。
