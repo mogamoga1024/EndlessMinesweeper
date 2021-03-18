@@ -62,12 +62,19 @@ li:last-child {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90px;
-  height: 65px;
-  font-size: 30px;
-  line-height: 65px;
+  height: 70px;
+  font-size: 40px;
+  line-height: 70px;
   text-align: center;
+  border-radius: 10px;
+  border: solid 5px #038874;
   /* Office */
   background-color: #0ff1ce;
+}
+
+#face:hover {
+  border: solid 5px #038874bb;
+  background-color: #0ff1cebb;
 }
 
 #minesCount {
