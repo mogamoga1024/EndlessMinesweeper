@@ -1,6 +1,6 @@
 // Minesweeperクラス
 // 使用者はstartメソッドを呼ぶだけでいいです。
-let Minesweeper = function(level) {
+const Minesweeper = function(level) {
 	this.level = level;
 	this.rowSize = fieldData[level].row;
 	this.colSize = fieldData[level].col;
@@ -23,7 +23,7 @@ let Minesweeper = function(level) {
 
 // ゲームを開始できる状況を作り出します。
 Minesweeper.prototype.start = function() {
-	let self = this;
+	const self = this;
 	
 	this.state = this.WORKING;
 	
@@ -38,10 +38,10 @@ Minesweeper.prototype.start = function() {
 	// HTMLのタグを作ります。
 	// 配列fieldも初期化しますが、まだ地雷は作りません。
 	for (let row = 0; row < this.rowSize; row++) {
-		let rowField = [];
+		const rowField = [];
 		$field.append("<tr></tr>");
 		for (let col = 0; col < this.colSize; col++) {
-			let id = this.pointToId(row, col);
+			const id = this.pointToId(row, col);
 			$("tr:last").append($("<td>").attr("id", id));
 			rowField.push({existsMine: false, existsFlag: false});
 		}
@@ -58,9 +58,9 @@ Minesweeper.prototype.start = function() {
 			// 左ボタン押下時
 			if (event.which === LEFT_DOWN) {
 				$face.text(Face.NEUTRAL);
-				let point = self.idToPoint($(this).attr("id"));
-				let row = point.row;
-				let col = point.col;
+				const point = self.idToPoint($(this).attr("id"));
+				const row = point.row;
+				const col = point.col;
 				// 初回左ボタンクリック時
 				if (self.isFirstLeftDown) {
 					self.isFirstLeftDown = false;
@@ -96,9 +96,9 @@ Minesweeper.prototype.start = function() {
 				// そのマスの数字と、周囲の旗の数が一致するときに
 				// 周囲の未開放のマスを掘ります。
 				if (self.isDownLeft) {
-					let point = self.idToPoint($(this).attr("id"));
-					let row = point.row;
-					let col = point.col;
+					const point = self.idToPoint($(this).attr("id"));
+					const row = point.row;
+					const col = point.col;
 					if (self.field[row][col] === null) {
 						// 周囲掘り
 						switch (self.digAround(row, col)) {
@@ -119,10 +119,10 @@ Minesweeper.prototype.start = function() {
 				// 旗が立てられていなければ、旗を立てます。
 				// 旗が立てられていれば、旗を消します。
 				else {
-					let id = $(this).attr("id");
-					let point = self.idToPoint(id);
-					let row = point.row;
-					let col = point.col;
+					const id = $(this).attr("id");
+					const point = self.idToPoint(id);
+					const row = point.row;
+					const col = point.col;
 					if (self.field[row][col] !== null) {
 						// 旗があれば、旗を消す。
 						if (self.field[row][col].existsFlag) {
@@ -166,7 +166,7 @@ Minesweeper.prototype.gameover = function() {
 	// 埋まっている地雷を表示します。
 	for (let row = 0; row < this.rowSize; row++) {
 		for (let col = 0; col < this.colSize; col++) {
-			let id = this.pointToId(row, col);
+			const id = this.pointToId(row, col);
 			if (this.field[row][col] !== null &&
 			    this.field[row][col].existsMine) {
 				$("#" + id).css("background-color", "blue");
@@ -212,11 +212,11 @@ Minesweeper.prototype.fillMines = function(ignoreRow, ignoreCol) {
 	// ただし、初回押下されたマスに地雷は配置されません。
 	for (let row = 0; row < this.rowSize; row++) {
 		for (let col = 0; col < this.colSize; col++) {
-			let tmpRow = Math.floor(Math.random() * this.rowSize);
-			let tmpCol = Math.floor(Math.random() * this.colSize);
+			const tmpRow = Math.floor(Math.random() * this.rowSize);
+			const tmpCol = Math.floor(Math.random() * this.colSize);
 			if (row === ignoreRow && col === ignoreCol ||
 			    tmpRow === ignoreRow && tmpCol === ignoreCol) continue;
-			let tmpExistsMine = this.field[row][col].existsMine;
+			const tmpExistsMine = this.field[row][col].existsMine;
 			this.field[row][col].existsMine = this.field[tmpRow][tmpCol].existsMine;
 			this.field[tmpRow][tmpCol].existsMine = tmpExistsMine;
 		}
@@ -225,7 +225,7 @@ Minesweeper.prototype.fillMines = function(ignoreRow, ignoreCol) {
 
 // tdタグのidを座標へ変換します。
 Minesweeper.prototype.idToPoint = function(id) {
-	let strPoint = id.substr(4).split("_");
+	const strPoint = id.substr(4).split("_");
 	return {row: Number(strPoint[0]), col: Number(strPoint[1])};
 };
 
@@ -240,8 +240,8 @@ Minesweeper.prototype.pointToId = function(row, col) {
 // ・周囲のマスの地雷数が0の場合は、周囲のマスを掘ります。
 // ・地雷以外のすべてのマスを掘った場合はクリアを返します。
 Minesweeper.prototype.dig = function(row, col) {
-	let id = this.pointToId(row, col);
-	let $cell = $("#" + id);
+	const id = this.pointToId(row, col);
+	const $cell = $("#" + id);
 	
 	// 対象のマスがすでに掘られていたり、旗が立てられている場合は掘りません。
 	if (this.field[row][col] === null) return this.WORKING;
@@ -258,7 +258,7 @@ Minesweeper.prototype.dig = function(row, col) {
 	this.safeCellsCount--;
 	$cell.css("background-color", rgba(this.fieldColorData, 0.5));
 	
-	let minesCount = this.aroundMinesCount(row, col); 
+	const minesCount = this.aroundMinesCount(row, col); 
 	// 周囲の地雷数が0でなければ、それを表示する。
 	if (minesCount !== 0) {
 		$cell.css("color", this.numberColor[minesCount]);
@@ -267,8 +267,8 @@ Minesweeper.prototype.dig = function(row, col) {
 	// 周囲に地雷が存在しなければ、周囲のマスを掘る。
 	else {
 		for (let i = 0; i < this.direction.length; i++) {
-			let targetRow = row + this.direction[i][0];
-			let targetCol = col + this.direction[i][1];
+			const targetRow = row + this.direction[i][0];
+			const targetCol = col + this.direction[i][1];
 			if (targetRow < 0 || targetRow === this.rowSize ||
 			    targetCol < 0 || targetCol === this.colSize) continue;
 			this.dig(targetRow, targetCol);
@@ -291,8 +291,8 @@ Minesweeper.prototype.digAround = function(row, col) {
 	let minesCount = 0;
 	let flagCount = 0;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize ||
 		    this.field[targetRow][targetCol] === null) continue;
@@ -307,11 +307,11 @@ Minesweeper.prototype.digAround = function(row, col) {
 	
 	let rtnState = this.WORKING;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize) continue;
-		let state = this.dig(targetRow, targetCol);
+		const state = this.dig(targetRow, targetCol);
 		if (state === this.DIED) {
 			rtnState = this.DIED;
 		}
@@ -327,8 +327,8 @@ Minesweeper.prototype.digAround = function(row, col) {
 Minesweeper.prototype.aroundMinesCount = function(row, col) {
 	let minesCount = 0;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize ||
 		    this.field[targetRow][targetCol] === null) continue;

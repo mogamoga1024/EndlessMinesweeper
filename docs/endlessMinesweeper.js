@@ -1,6 +1,6 @@
 // EndlessMinesweeperクラス
 // Minesweeperクラスの無限版です。
-let EndlessMinesweeper = function() {
+const EndlessMinesweeper = function() {
 	this.rowSize = 0;
 	this.colSize = fieldData[ENDLESS].col;
 	this.subRowSize = fieldData[ENDLESS].row;
@@ -19,7 +19,7 @@ let EndlessMinesweeper = function() {
 };
 
 EndlessMinesweeper.prototype.start = function() {
-	let self = this;
+	const self = this;
 	
 	this.state = this.WORKING;
 	
@@ -33,13 +33,13 @@ EndlessMinesweeper.prototype.start = function() {
 	
 	let row = 0;
 	for (let level = EASY; level <= TAXING; level++) {
-		let key = this.levelToKey(level);
+		const key = this.levelToKey(level);
 		let safeCellsCount = this.subRowSize * this.colSize;
 		for (let subRow = 0; subRow < this.subRowSize; subRow++) {
-			let rowField = [];
+			const rowField = [];
 			$field.append("<tr></tr>");
 			for (let col = 0; col < this.colSize; col++) {
-				let id = this.pointToId(row, col);
+				const id = this.pointToId(row, col);
 				$("tr:last").append($("<td>")
 					.attr({id: id, key: key})
 					.css("background-color", rgba(fieldData[level].colorData)));
@@ -65,16 +65,16 @@ EndlessMinesweeper.prototype.start = function() {
 		function(event) {
 			if (event.which === LEFT_DOWN) {
 				$face.text(Face.NEUTRAL);
-				let point = self.idToPoint($(this).attr("id"));
-				let row = point.row;
-				let col = point.col;
+				const point = self.idToPoint($(this).attr("id"));
+				const row = point.row;
+				const col = point.col;
 				if (self.isFirstLeftDown) {
 					self.isFirstLeftDown = false;
 					// 初回押下時に地雷を踏んだ場合、その地雷をなくして処理を行う。
 					if (self.field[row][col].existsMine) {
 						self.field[row][col].existsMine = false;
-						let id = self.pointToId(row, col);
-						let key = $("#" + id).attr("key");
+						const id = self.pointToId(row, col);
+						const key = $("#" + id).attr("key");
 						self.safeCellsCounts[key]++;
 					}
 					self.timer.start();
@@ -86,7 +86,7 @@ EndlessMinesweeper.prototype.start = function() {
 					}
 				}
 				self.isDownLeft = true;
-				let state = self.dig(row, col);
+				const state = self.dig(row, col);
 				self.score.display();
 				switch (state) {
 					case self.WORKING:
@@ -98,11 +98,11 @@ EndlessMinesweeper.prototype.start = function() {
 			}
 			else if (event.which === RIGHT_DOWN) {
 				if (self.isDownLeft) {
-					let point = self.idToPoint($(this).attr("id"));
-					let row = point.row;
-					let col = point.col;
+					const point = self.idToPoint($(this).attr("id"));
+					const row = point.row;
+					const col = point.col;
 					if (self.field[row][col] === null) {
-						let state = self.digAround(row, col);
+						const state = self.digAround(row, col);
 						self.score.display();
 						switch (state) {
 							case self.WORKING:
@@ -115,10 +115,10 @@ EndlessMinesweeper.prototype.start = function() {
 					}
 				}
 				else {
-					let id = $(this).attr("id");
-					let point = self.idToPoint(id);
-					let row = point.row;
-					let col = point.col;
+					const id = $(this).attr("id");
+					const point = self.idToPoint(id);
+					const row = point.row;
+					const col = point.col;
 					if (self.field[row][col] !== null) {
 						if (self.field[row][col].existsFlag) {
 							self.field[row][col].existsFlag = false;
@@ -151,13 +151,13 @@ EndlessMinesweeper.prototype.start = function() {
 			
 			let row = topRowOfAddedField;
 			for (let level = EASY; level <= TAXING; level++) {
-				let key = self.levelToKey(level);
+				const key = self.levelToKey(level);
 				let safeCellsCount = self.subRowSize * self.colSize;
 				for (let subRow = 0; subRow < self.subRowSize; subRow++) {
-					let rowField = [];
+					const rowField = [];
 					$field.append("<tr></tr>");
 					for (let col = 0; col < self.colSize; col++) {
-						let id = self.pointToId(row, col);
+						const id = self.pointToId(row, col);
 						$("tr:last").append($("<td>")
 							.attr({id: id, key: key})
 							.css("background-color", rgba(fieldData[level].colorData)));
@@ -185,9 +185,9 @@ EndlessMinesweeper.prototype.start = function() {
 			
 			for (let col = 0; col < self.colSize; col++) {
 				if (self.field[topRowOfAddedField - 1][col] === null) {
-					let id = self.pointToId(topRowOfAddedField - 1, col);
-					let $cell = $("#" + id);
-					let minesCount = self.aroundMinesCount(topRowOfAddedField - 1, col); 
+					const id = self.pointToId(topRowOfAddedField - 1, col);
+					const $cell = $("#" + id);
+					const minesCount = self.aroundMinesCount(topRowOfAddedField - 1, col); 
 					if (minesCount !== 0) {
 						$cell.css("color", self.numberColor[minesCount]);
 						$cell.text(minesCount);
@@ -212,7 +212,7 @@ EndlessMinesweeper.prototype.gameover = function() {
 	
 	for (let row = 0; row < this.rowSize; row++) {
 		for (let col = 0; col < this.colSize; col++) {
-			let id = this.pointToId(row, col);
+			const id = this.pointToId(row, col);
 			if (this.field[row][col] !== null &&
 			    this.field[row][col].existsMine) {
 				$("#" + id).css("background-color", "blue");
@@ -222,7 +222,7 @@ EndlessMinesweeper.prototype.gameover = function() {
 };
 
 EndlessMinesweeper.prototype.idToPoint = function(id) {
-	let strPoint = id.substr(4).split("_");
+	const strPoint = id.substr(4).split("_");
 	return {row: Number(strPoint[0]), col: Number(strPoint[1])};
 };
 
@@ -266,24 +266,24 @@ EndlessMinesweeper.prototype.dig = function(row, col) {
 	
 	this.field[row][col] = null;
 	
-	let id = this.pointToId(row, col);
-	let $cell = $("#" + id);
-	let key = $cell.attr("key")
-	let level = this.keyToLevel(key);
+	const id = this.pointToId(row, col);
+	const $cell = $("#" + id);
+	const key = $cell.attr("key")
+	const level = this.keyToLevel(key);
 	
 	this.safeCellsCounts[key]--;
 	$cell.css("background-color", rgba(fieldData[level].colorData, 0.5));
 	this.score.addDigScore(level);
 	
-	let minesCount = this.aroundMinesCount(row, col); 
+	const minesCount = this.aroundMinesCount(row, col); 
 	if (minesCount !== 0) {
 		$cell.css("color", this.numberColor[minesCount]);
 		$cell.text(minesCount);
 	}
 	else {
 		for (let i = 0; i < this.direction.length; i++) {
-			let targetRow = row + this.direction[i][0];
-			let targetCol = col + this.direction[i][1];
+			const targetRow = row + this.direction[i][0];
+			const targetCol = col + this.direction[i][1];
 			if (targetRow < 0 || targetRow === this.rowSize ||
 			    targetCol < 0 || targetCol === this.colSize) continue;
 			this.dig(targetRow, targetCol);
@@ -293,12 +293,12 @@ EndlessMinesweeper.prototype.dig = function(row, col) {
 	if (key in this.safeCellsCounts) {
 		if (this.safeCellsCounts[key] === 0) {
 			delete this.safeCellsCounts[key];
-			let self = this;
+			const self = this;
 			$("td[key='" + key + "']").each(function() {
-				let $this = $(this);
-				let point = self.idToPoint($this.attr("id"));
-				let row = point.row;
-				let col = point.col;
+				const $this = $(this);
+				const point = self.idToPoint($this.attr("id"));
+				const row = point.row;
+				const col = point.col;
 				if (self.field[row][col] !== null) {
 					self.field[row][col].existsFlag = true;
 					$this.mousedown(function() {return false;});
@@ -316,8 +316,8 @@ EndlessMinesweeper.prototype.digAround = function(row, col) {
 	let minesCount = 0;
 	let flagCount = 0;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize ||
 		    this.field[targetRow][targetCol] === null) continue;
@@ -332,11 +332,11 @@ EndlessMinesweeper.prototype.digAround = function(row, col) {
 	
 	let rtnState = this.WORKING;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize) continue;
-		let state = this.dig(targetRow, targetCol);
+		const state = this.dig(targetRow, targetCol);
 		if (state === this.DIED) {
 			rtnState = this.DIED;
 		}
@@ -348,8 +348,8 @@ EndlessMinesweeper.prototype.digAround = function(row, col) {
 EndlessMinesweeper.prototype.aroundMinesCount = function(row, col) {
 	let minesCount = 0;
 	for (let i = 0; i < this.direction.length; i++) {
-		let targetRow = row + this.direction[i][0];
-		let targetCol = col + this.direction[i][1];
+		const targetRow = row + this.direction[i][0];
+		const targetCol = col + this.direction[i][1];
 		if (targetRow < 0 || targetRow === this.rowSize ||
 		    targetCol < 0 || targetCol === this.colSize ||
 		    this.field[targetRow][targetCol] === null) continue;

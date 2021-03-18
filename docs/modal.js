@@ -6,7 +6,7 @@ $("#history").click(function() {
 	}
 
 	$(".record").each(function(level) {
-		let $this = $(this)
+		const $this = $(this)
 
 		if (level !== ENDLESS) {
 			$this.children(".first").text(secToHms(Recode.data[level].ranking[0]));

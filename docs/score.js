@@ -1,6 +1,6 @@
 // Scoreクラス
 // ENDLESSモード時にスコアを管理します。
-let Score = function() {
+const Score = function() {
 	this.score = 0;
 };
 

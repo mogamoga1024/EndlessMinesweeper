@@ -2,14 +2,14 @@
 // ロード時処理とかいろいろ
 
 // 選択したレベルで、画面を初期化します。
-let init = function(level) {
+const init = function(level) {
 	$(window).scrollTop(0);
 	$window.off("scroll");
 	$field.off("mousedown mouseup");
 	$("td").off("mousedown mouseup");
 	currentLevel = level;
 	timer.reset();
-	let minesweeper = MinesweeperFactory.create(level);
+	const minesweeper = MinesweeperFactory.create(level);
 	minesweeper.start();
 };
 
@@ -25,8 +25,8 @@ if(navigator.userAgent.match(/MSIE 10/i) ||
    navigator.userAgent.match(/Edge\/12\./)) {
 	$('body').on("mousewheel", function () {
 		event.preventDefault();
-		let wd = event.wheelDelta;
-		let csp = window.pageYOffset;
+		const wd = event.wheelDelta;
+		const csp = window.pageYOffset;
 		window.scrollTo(0, csp - wd);
 	});
 }
@@ -39,7 +39,7 @@ if (localStorage !== undefined && localStorage.getItem("recode") != null) {
 	Recode.data = JSON.parse(localStorage.getItem("recode"));
 }
 
-let timer = Timer.getInstance();
+const timer = Timer.getInstance();
 let currentLevel = EASY;
 
 init(currentLevel);

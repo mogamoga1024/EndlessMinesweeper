@@ -1,7 +1,7 @@
 // Timerクラス
 // 時間の管理を行います。
 // どこからでも、ひとつのタイマーを操作をしたいので、シングルトンです。
-let Timer = (function() {
+const Timer = (function() {
 	let startTime;
 	let timer;
 	let instance;
