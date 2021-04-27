@@ -42,19 +42,19 @@ Minesweeper.prototype.start = function() {
 		$field.append("<tr></tr>");
 		for (let col = 0; col < this.colSize; col++) {
 			const id = this.pointToId(row, col);
-			$("tr:last").append($("<td>").attr("id", id));
+			$("tr:last").append($("<td>")
+				.attr("id", id)
+				.css("background-color", rgba(this.fieldColorData)));
 			rowField.push({existsMine: false, existsFlag: false});
 		}
 		this.field.push(rowField);
 	}
 	
-	$("#field td").css("background-color", rgba(this.fieldColorData));
-	
 	// イベント処理
 	const LEFT_DOWN = 1;
 	const RIGHT_DOWN = 3;
-	$("#field td").on({
-		"mousedown": function(event) {
+	$field.on("mousedown", "td",
+		function(event) {
 			// 左ボタン押下時
 			if (event.which === LEFT_DOWN) {
 				$face.text(Face.NEUTRAL);
@@ -141,17 +141,19 @@ Minesweeper.prototype.start = function() {
 					}
 				}
 			}
-		},
-		// 左ボタンが離されたときに、左ボタン押下中フラグを折ります。
-		// 左ボタン押下中フラグは、右ボタン押下時処理で、
-		// 周囲掘りをするかどうかの判定に用いります。
-		"mouseup": function(event) {
+		}
+	);
+	// 左ボタンが離されたときに、左ボタン押下中フラグを折ります。
+	// 左ボタン押下中フラグは、右ボタン押下時処理で、
+	// 周囲掘りをするかどうかの判定に用いります。
+	$window.on("mouseup",
+		function(event) {
 			if (event.which === LEFT_DOWN) {
 				$face.text(Face.SMILE);
 				self.isDownLeft = false;
 			}
 		}
-	});
+	);
 };
 
 // ゲームオーバー時処理
@@ -159,7 +161,8 @@ Minesweeper.prototype.gameover = function() {
 	// タイマーを止めます。
 	this.timer.stop();
 	// マス上でのイベントをなくします。
-	$("#field td").off("mousedown mouseup");
+	$window.off("mouseup");
+	$field.off("mousedown");
 	
 	$face.text(Face.DIZZY);
 	
@@ -180,7 +183,8 @@ Minesweeper.prototype.gameclear = function() {
 	// タイマーを止めます。
 	this.timer.stop();
 	// マス上でのイベントをなくします。
-	$("#field td").off("mousedown mouseup");
+	$window.off("mouseup");
+	$field.off("mousedown");
 	
 	$face.text(Face.SUNGLASSES);
 	

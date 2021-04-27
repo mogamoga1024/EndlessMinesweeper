@@ -134,7 +134,7 @@ EndlessMinesweeper.prototype.start = function() {
 		}
 	);
 	
-	$field.on("mouseup", "td",
+	$window.on("mouseup",
 		function(event) {
 			if (event.which === LEFT_DOWN) {
 				$face.text(Face.SMILE);
@@ -200,8 +200,8 @@ EndlessMinesweeper.prototype.start = function() {
 
 EndlessMinesweeper.prototype.gameover = function() {
 	this.timer.stop();
-	$window.off("scroll");
-	$field.off("mousedown mouseup");
+	$window.off("scroll mouseup");
+	$field.off("mousedown");
 	
 	$face.text(Face.DIZZY);
 	
