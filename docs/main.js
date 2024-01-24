@@ -14,7 +14,7 @@ const init = function(level) {
 };
 
 // tableタグ内での右クリックでメニューを表示させない。
-$field.on('contextmenu',function(){
+$field.on("contextmenu",function(){
 	return false;
 });
 
