@@ -59,11 +59,11 @@ EndlessMinesweeper.prototype.start = function() {
 	}
 	this.layer++;
 	
-	const LEFT_DOWN = 1;
-	const RIGHT_DOWN = 3;
+	const LEFT_DOWN = 0;
+	const RIGHT_DOWN = 2;
 	$field.on("mousedown", "td",
 		function(event) {
-			if (event.which === LEFT_DOWN) {
+			if (event.button === LEFT_DOWN) {
 				$face.text(Face.NEUTRAL);
 				const point = self.idToPoint($(this).attr("id"));
 				const row = point.row;
@@ -96,7 +96,7 @@ EndlessMinesweeper.prototype.start = function() {
 						break;
 				}
 			}
-			else if (event.which === RIGHT_DOWN) {
+			else if (event.button === RIGHT_DOWN) {
 				if (self.isDownLeft) {
 					const point = self.idToPoint($(this).attr("id"));
 					const row = point.row;
@@ -136,7 +136,7 @@ EndlessMinesweeper.prototype.start = function() {
 	
 	$window.on("mouseup",
 		function(event) {
-			if (event.which === LEFT_DOWN) {
+			if (event.button === LEFT_DOWN) {
 				$face.text(Face.SMILE);
 				self.isDownLeft = false;
 			}

@@ -51,12 +51,12 @@ Minesweeper.prototype.start = function() {
 	}
 	
 	// イベント処理
-	const LEFT_DOWN = 1;
-	const RIGHT_DOWN = 3;
+	const LEFT_DOWN = 0;
+	const RIGHT_DOWN = 2;
 	$field.on("mousedown", "td",
 		function(event) {
 			// 左ボタン押下時
-			if (event.which === LEFT_DOWN) {
+			if (event.button === LEFT_DOWN) {
 				$face.text(Face.NEUTRAL);
 				const point = self.idToPoint($(this).attr("id"));
 				const row = point.row;
@@ -90,7 +90,7 @@ Minesweeper.prototype.start = function() {
 				}
 			}
 			// 右ボタン押下時
-			else if (event.which === RIGHT_DOWN) {
+			else if (event.button === RIGHT_DOWN) {
 				// もし解放されているマスの上で、
 				// 左ボタンを押下されている状態で右ボタンを押下した場合、
 				// そのマスの数字と、周囲の旗の数が一致するときに
@@ -148,7 +148,7 @@ Minesweeper.prototype.start = function() {
 	// 周囲掘りをするかどうかの判定に用いります。
 	$window.on("mouseup",
 		function(event) {
-			if (event.which === LEFT_DOWN) {
+			if (event.button === LEFT_DOWN) {
 				$face.text(Face.SMILE);
 				self.isDownLeft = false;
 			}
