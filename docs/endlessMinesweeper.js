@@ -109,7 +109,6 @@ EndlessMinesweeper.prototype.start = function() {
 								break;
 							case self.DIED:
 								self.gameover();
-								return;
 								break;
 						}
 					}
@@ -133,7 +132,24 @@ EndlessMinesweeper.prototype.start = function() {
 			}
 		}
 	);
-	
+	$field.on("dblclick", "td",
+		function() {
+			const point = self.idToPoint($(this).attr("id"));
+			const row = point.row;
+			const col = point.col;
+			if (self.field[row][col] === null) {
+				const state = self.digAround(row, col);
+				self.score.display();
+				switch (state) {
+					case self.WORKING:
+						break;
+					case self.DIED:
+						self.gameover();
+						break;
+				}
+			}
+		}
+	);
 	$window.on("mouseup",
 		function(event) {
 			if (event.button === LEFT_DOWN) {
@@ -202,6 +218,7 @@ EndlessMinesweeper.prototype.gameover = function() {
 	this.timer.stop();
 	$window.off("scroll mouseup");
 	$field.off("mousedown");
+	$field.off("dblclick");
 	
 	$face.text(Face.DIZZY);
 	

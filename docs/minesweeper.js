@@ -106,7 +106,6 @@ Minesweeper.prototype.start = function() {
 								break;
 							case self.DIED:
 								self.gameover();
-								return;
 								break;
 							case self.CLEAR:
 								self.gameclear();
@@ -143,6 +142,28 @@ Minesweeper.prototype.start = function() {
 			}
 		}
 	);
+	// ダブルクリックされたときは、
+	// 左ボタンが押された状態で右ボタンが押されたときと同じ処理を行います。
+	$field.on("dblclick", "td",
+		function() {
+			const point = self.idToPoint($(this).attr("id"));
+			const row = point.row;
+			const col = point.col;
+			if (self.field[row][col] === null) {
+				// 周囲掘り
+				switch (self.digAround(row, col)) {
+					case self.WORKING:
+						break;
+					case self.DIED:
+						self.gameover();
+						break;
+					case self.CLEAR:
+						self.gameclear();
+						break;
+				}
+			}
+		}
+	);
 	// 左ボタンが離されたときに、左ボタン押下中フラグを折ります。
 	// 左ボタン押下中フラグは、右ボタン押下時処理で、
 	// 周囲掘りをするかどうかの判定に用いります。
@@ -163,6 +184,7 @@ Minesweeper.prototype.gameover = function() {
 	// マス上でのイベントをなくします。
 	$window.off("mouseup");
 	$field.off("mousedown");
+	$field.off("dblclick");
 	
 	$face.text(Face.DIZZY);
 	
@@ -185,6 +207,7 @@ Minesweeper.prototype.gameclear = function() {
 	// マス上でのイベントをなくします。
 	$window.off("mouseup");
 	$field.off("mousedown");
+	$field.off("dblclick");
 	
 	$face.text(Face.SUNGLASSES);
 	
