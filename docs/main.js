@@ -5,8 +5,8 @@
 const init = function(level) {
 	$(window).scrollTop(0);
 	$window.off("scroll");
-	$field.off("mousedown mouseup");
-	$("td").off("mousedown mouseup");
+	$field.off("mousedown mouseup dblclick");
+	$("td").off("mousedown mouseup dblclick");
 	currentLevel = level;
 	timer.reset();
 	const minesweeper = MinesweeperFactory.create(level);
